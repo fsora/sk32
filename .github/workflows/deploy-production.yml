@@ -16,28 +16,19 @@ jobs:
         run: |
           npm install
           npm install -g firebase-tools
+        working-directory: ./app # この行で作業ディレクトリを指定
       - name: lint and test
         run: |
           npm run lint
           npm test
-          - name: Check current directory and list files
-          run: |
-            # 現在のディレクトリを表示
-            pwd
-            
-            # リポジトリのルートディレクトリの内容をリスト表示
-            ls -la
-            
-            # "sk32" フォルダ内の内容をリスト表示
-            ls -la ./sk32
-
-            # "sk32" フォルダの中で、package.json を探す
-            find ./sk32 -name "package.json"
-
+        working-directory: ./app # 作業ディレクトリを指定
       - run: npm run build:prod
+        working-directory: ./app # 作業ディレクトリを指定
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SK32_APP }}
           channelId: live
           projectId: sk32-app
+          working-directory: ./app # 作業ディレクトリを指定
+
