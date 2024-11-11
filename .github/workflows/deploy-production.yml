@@ -20,6 +20,20 @@ jobs:
         run: |
           npm run lint
           npm test
+          - name: Check current directory and list files
+          run: |
+            # 現在のディレクトリを表示
+            pwd
+            
+            # リポジトリのルートディレクトリの内容をリスト表示
+            ls -la
+            
+            # "sk32" フォルダ内の内容をリスト表示
+            ls -la ./sk32
+
+            # "sk32" フォルダの中で、package.json を探す
+            find ./sk32 -name "package.json"
+
       - run: npm run build:prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
