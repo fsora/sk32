@@ -14,7 +14,6 @@ jobs:
           node-version: 20
       - name: lint and test
         run: |
-          npm install
           npm run lint
           npm run test
       - run: npm run build:prod
