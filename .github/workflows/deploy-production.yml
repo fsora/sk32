@@ -16,19 +16,17 @@ jobs:
         run: |
           npm install
           npm install -g firebase-tools
-        working-directory: app # この行で作業ディレクトリを指定
+        working-directory: /home/runner/work/sk32/app # ここで絶対パスに変更
       - name: lint and test
         run: |
           npm run lint
           npm test
-        working-directory: app # 作業ディレクトリを指定
+        working-directory: /home/runner/work/sk32/app # 同様に修正
       - run: npm run build:prod
-        working-directory: app # 作業ディレクトリを指定
+        working-directory: /home/runner/work/sk32/app # 同様に修正
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SK32_APP }}
           channelId: live
           projectId: sk32-app
-          working-directory: app # 作業ディレクトリを指定
-
